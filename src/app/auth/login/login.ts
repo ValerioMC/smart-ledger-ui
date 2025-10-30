@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router } from '@angular/router';
 import { AuthService } from '../auth';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -38,7 +39,7 @@ export class Login {
         },
         error: (error) => {
           this.isLoading = false;
-          this.errorMessage = 'Credenziali non valide. Riprova.';
+          this.errorMessage = 'auth.loginError';
         }
       });
     }

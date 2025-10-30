@@ -3,6 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
+export enum Role {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+  SUPERVISOR = 'SUPERVISOR'
+}
+
 export interface LoginRequest {
   username: string;
   password: string;
@@ -11,11 +17,13 @@ export interface LoginRequest {
 export interface LoginResponse {
   token: string;
   username: string;
+  roles: Role[];
 }
 
 export interface User {
   username: string;
   token: string;
+  roles: Role[];
 }
 
 @Injectable({
@@ -45,7 +53,8 @@ export class AuthService {
         tap(response => {
           const user: User = {
             username: response.username,
-            token: response.token
+            token: response.token,
+            roles: response.roles
           };
           localStorage.setItem(this.TOKEN_KEY, response.token);
           localStorage.setItem(this.USER_KEY, JSON.stringify(user));
@@ -66,5 +75,32 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+  hasRole(role: Role): boolean {
+    const user = this.currentUserValue;
+    return user ? user.roles.includes(role) : false;
+  }
+
+  hasAnyRole(roles: Role[]): boolean {
+    const user = this.currentUserValue;
+    return user ? roles.some(role => user.roles.includes(role)) : false;
+  }
+
+  hasAllRoles(roles: Role[]): boolean {
+    const user = this.currentUserValue;
+    return user ? roles.every(role => user.roles.includes(role)) : false;
+  }
+
+  isAdmin(): boolean {
+    return this.hasRole(Role.ADMIN);
+  }
+
+  isSupervisor(): boolean {
+    return this.hasRole(Role.SUPERVISOR);
+  }
+
+  isUser(): boolean {
+    return this.hasRole(Role.USER);
   }
 }

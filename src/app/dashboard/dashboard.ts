@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../auth/auth';
+import { Layout } from '../components/layout/layout';
 
 interface FinancialSummary {
   totalIncome: number;
@@ -21,7 +23,7 @@ interface Transaction {
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule],
+  imports: [CommonModule, Layout, TranslateModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -77,11 +79,6 @@ export class Dashboard implements OnInit {
     if (currentUser) {
       this.username = currentUser.username;
     }
-  }
-
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
   }
 
   getTransactionClass(transaction: Transaction): string {
