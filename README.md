@@ -1,118 +1,118 @@
 # Smart Ledger UI
 
-Applicazione frontend per Smart Ledger - Sistema di gestione finanziaria intelligente.
+Frontend application for Smart Ledger — an intelligent financial management system.
 
-## Tecnologie Utilizzate
+## Technologies Used
 
-- **Angular 20** - Framework JavaScript per applicazioni web
-- **Tailwind CSS 4** - Framework CSS utility-first per design moderno
-- **TypeScript** - Linguaggio di programmazione tipizzato
-- **RxJS** - Libreria per programmazione reattiva
+- **Angular 20** — JavaScript framework for web applications
+- **Tailwind CSS 4** — Utility‑first CSS framework for modern design
+- **TypeScript** — Typed programming language
+- **RxJS** — Library for reactive programming
 
-## Prerequisiti
+## Prerequisites
 
-- Node.js 18+ e npm
-- Backend Smart Ledger in esecuzione (vedi `smart-ledger-be/README.md`)
+- Node.js 18+ and npm
+- Smart Ledger backend running (see `smart-ledger-be/README.md`)
 
-## Installazione
+## Installation
 
 ```bash
-# Installare le dipendenze
+# Install dependencies
 npm install
 ```
 
-## Configurazione
+## Configuration
 
-L'applicazione utilizza file di environment per la configurazione:
+The application uses environment files for configuration:
 
-- `src/environments/environment.ts` - Configurazione sviluppo
-- `src/environments/environment.prod.ts` - Configurazione produzione
+- `src/environments/environment.ts` — Development configuration
+- `src/environments/environment.prod.ts` — Production configuration
 
-### Configurazione Backend URL
+### Backend URL Configuration
 
-Modificare il file `src/environments/environment.ts` per puntare al backend:
+Edit `src/environments/environment.ts` to point to the backend:
 
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api'  // URL del backend
+  apiUrl: 'http://localhost:8080/api'  // Backend URL
 };
 ```
 
-## Sviluppo
+## Development
 
 ```bash
-# Avviare il server di sviluppo
+# Start the development server
 npm start
 
-# L'applicazione sarà disponibile su http://localhost:4200
+# The app will be available at http://localhost:4200
 ```
 
-Il server di sviluppo si ricaricherà automaticamente quando vengono modificati i file sorgente.
+The dev server will automatically reload when source files change.
 
 ## Build
 
 ```bash
-# Build di produzione
+# Production build
 npm run build
 
-# I file compilati saranno nella cartella `dist/smart-ledger-ui`
+# The compiled files will be in `dist/smart-ledger-ui`
 ```
 
-## Test
+## Tests
 
 ```bash
-# Eseguire i test unitari
+# Run unit tests
 npm test
 ```
 
-## Struttura del Progetto
+## Project Structure
 
 ```
 src/
 ├── app/
-│   ├── auth/                 # Modulo autenticazione
-│   │   ├── login/           # Componente login
-│   │   ├── auth.ts          # Servizio autenticazione
-│   │   ├── auth-guard.ts    # Guard per rotte protette
-│   │   └── auth-interceptor.ts  # Interceptor JWT
-│   ├── dashboard/           # Componente dashboard
-│   ├── app.routes.ts        # Configurazione routing
-│   └── app.config.ts        # Configurazione app
-├── environments/            # File di configurazione
-└── styles.css              # Stili globali Tailwind
+│   ├── auth/                 # Authentication module
+│   │   ├── login/            # Login component
+│   │   ├── auth.ts           # Authentication service
+│   │   ├── auth-guard.ts     # Guard for protected routes
+│   │   └── auth-interceptor.ts  # JWT interceptor
+│   ├── dashboard/            # Dashboard component
+│   ├── app.routes.ts         # Routing configuration
+│   └── app.config.ts         # App configuration
+├── environments/             # Configuration files
+└── styles.css                # Global Tailwind styles
 ```
 
-## Funzionalità Principali
+## Main Features
 
-### Autenticazione
-- Login con username e password
-- Autenticazione JWT con il backend
-- Gestione automatica del token nelle richieste HTTP
-- Protezione delle rotte tramite guard
+### Authentication
+- Login with username and password
+- JWT authentication with the backend
+- Automatic token handling in HTTP requests
+- Route protection using guards
 
 ### Dashboard
-- Visualizzazione riepilogo finanziario
-  - Entrate totali
-  - Uscite totali
-  - Bilancio corrente
-- Lista transazioni recenti
-- Design moderno e responsive
+- Financial summary view
+  - Total income
+  - Total expenses
+  - Current balance
+- Recent transactions list
+- Modern and responsive design
 
 ## Deployment
 
-### Build di Produzione
+### Production Build
 
 ```bash
 npm run build
 ```
 
-### Deploy su Server Web
+### Deploy to a Web Server
 
-1. Copiare il contenuto della cartella `dist/smart-ledger-ui` sul server web
-2. Configurare il server per servire `index.html` per tutte le rotte (routing lato client)
+1. Copy the contents of `dist/smart-ledger-ui` to your web server
+2. Configure the server to serve `index.html` for all routes (client‑side routing)
 
-### Esempio Nginx
+### Nginx Example
 
 ```nginx
 server {
@@ -125,7 +125,7 @@ server {
         try_files $uri $uri/ /index.html;
     }
 
-    # Proxy per API backend
+    # Backend API proxy
     location /api {
         proxy_pass http://backend:8080;
         proxy_set_header Host $host;
@@ -134,20 +134,20 @@ server {
 }
 ```
 
-## Note di Sicurezza
+## Security Notes
 
-- Il token JWT viene salvato in localStorage
-- Le rotte protette richiedono autenticazione valida
-- Tutte le richieste API includono automaticamente il token JWT nell'header Authorization
+- The JWT token is stored in localStorage
+- Protected routes require valid authentication
+- All API requests automatically include the JWT token in the Authorization header
 
-## Sviluppo Futuro
+## Future Development
 
-- Gestione transazioni (CRUD)
-- Grafici e statistiche avanzate
-- Categorie personalizzabili
-- Export dati in vari formati
-- Notifiche in tempo reale
+- Transaction management (CRUD)
+- Advanced charts and analytics
+- Customizable categories
+- Data export in various formats
+- Real-time notifications
 
-## Licenza
+## License
 
-Tutti i diritti riservati © 2025
+All rights reserved © 2025
